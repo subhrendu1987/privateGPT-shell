@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <script>
+    document.querySelector('form[action="/ingest"]').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    fetch('/ingest', {
+        method: 'POST'
+    })
+    .then(response => response.text())
+    .then(output => {
+        document.querySelector('#commandOutput').innerText = output;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.querySelector('#commandOutput').innerText = 'Error executing command.';
+    });
+});
+    </script>
+</head>
+<!--------------------------------------------------------------------->
+<body><center>
+<h3>private GPT Interface: Presented by NIL@IDRBT
+<img src="NIL_Logo.drawio.png" alt="NIL Logo" style="width: 40px; height: 40px;"></h3>
+<hr>
+<form ref='uploadForm' 
+      action='/' 
+      method='post' 
+      encType="multipart/form-data">
+    <input type="file" name="file" />
+    <button type="submit" name="action" value="upload">Upload</button>
+    <!--button type="submit" name="action" value="ingest">Ingest</button-->
+</form>
+<hr>
+<!-- The server will dynamically insert the file list here -->
+<!-- When a file is uploaded, the server will also provide feedback here -->
+
+<!-- Placeholder for command output -->
+<div id="commandOutput"></div>
+</center>
+</body>
+</html>
+

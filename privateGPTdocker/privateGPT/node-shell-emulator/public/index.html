@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Shell Emulator</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <input type="text" id="command" placeholder="Enter shell command">
+    <button onclick="executeCommand()">Execute</button>
+    <pre id="output"></pre>
+
+    <script>
+        const socket = io.connect();
+        const outputElem = document.getElementById('output');
+
+        socket.on('output', (data) => {
+            outputElem.textContent += data + '\n';
+        });
+
+        function executeCommand() {
+            const command = document.getElementById('command').value;
+            socket.emit('execute', command);
+        }
+    </script>
+</body>
+</html>

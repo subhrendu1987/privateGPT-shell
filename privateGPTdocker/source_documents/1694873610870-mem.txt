@@ -1,0 +1,58 @@
+  *-cache:0
+       description: L1 cache
+       physical id: 5
+       slot: L1-Cache
+       size: 64KiB
+       capacity: 64KiB
+       capabilities: internal write-back unified
+       configuration: level=1
+  *-cache:1
+       description: L2 cache
+       physical id: 6
+       slot: L2-Cache
+       size: 512KiB
+       capacity: 512KiB
+       capabilities: internal varies unified
+       configuration: level=2
+  *-cache:2
+       description: L3 cache
+       physical id: 7
+       slot: L3-Cache
+       size: 3MiB
+       capacity: 3MiB
+       capabilities: internal varies unified
+       configuration: level=3
+  *-memory
+       description: System Memory
+       physical id: 1d
+       slot: System board or motherboard
+       size: 4GiB
+     *-bank:0
+          description: DIMM DDR3 Synchronous 1333 MHz (0.8 ns)
+          product: M471B5673FH0-CH9
+          vendor: Samsung
+          physical id: 0
+          serial: 92B736A8
+          slot: DIMM_A
+          size: 2GiB
+          width: 64 bits
+          clock: 1333MHz (0.8ns)
+     *-bank:1
+          description: DIMM DDR3 Synchronous 1333 MHz (0.8 ns)
+          product: M471B5673FH0-CH9
+          vendor: Samsung
+          physical id: 1
+          serial: 92B7387F
+          slot: DIMM_B
+          size: 2GiB
+          width: 64 bits
+          clock: 1333MHz (0.8ns)
+  *-firmware
+       description: BIOS
+       vendor: Dell Inc.
+       physical id: 0
+       version: A15
+       date: 07/19/2011
+       size: 64KiB
+       capacity: 2MiB
+       capabilities: mca pci upgrade shadowing escd cdboot bootselect socketedrom edd int13floppy1200 int13floppy720 int13floppy2880 int5printscreen int9keyboard int14serial int17printer int10video acpi usb zipboot biosbootspecification

@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  privategpt:
+    #image: privategpt:latest
+    image: rattydave/privategpt:latest
+    container_name: PrivateGPT
+    deploy:
+      resources:
+        limits:
+          cpus: '3'
+          memory: 3000M
+        reservations:
+          cpus: '2'
+          memory: 3000M
+    ports:
+      - "3000:3000"
+      - "5000:5000"
+    volumes:
+      - ./models:/root/privateGPT/server/models
+      - ./source_documents:/root/privateGPT/server/source_documents
+      #- ./privateGPT/client:/root/privateGPT/client
+      #- ./privateGPT/client-test:/root/privateGPT/client-test
+      #- ./privateGPT/server/ingest.py:/root/privateGPT/server/ingest.py
+      #- ./privateGPT/node-shell-emulator:/root/privateGPT/node-shell-emulator
+      

@@ -1,0 +1,5 @@
+# sudo docker build . -t privategpt:latest
+FROM rattydave/privategpt
+
+RUN npm install -g express multer body-parser xterm socket.io interactjs
+
