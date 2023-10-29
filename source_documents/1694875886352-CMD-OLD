@@ -1,0 +1,8 @@
+sudo docker run -d --name pgptold \
+  -v /home/user/source:/root/privateGPT/server/source_documents \
+  -p 3001:3000 \
+  -p 5001:5000 \
+  rattydave/privategpt
+  
+  
+wget https://gpt4all.io/models/ggml-gpt4all-j-v1.3-groovy.bin -O privateGPTdocker/privateGPT/server/models/ggml-gpt4all-j-v1.3-groovy.bin

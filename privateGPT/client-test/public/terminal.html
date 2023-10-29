@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Shell Emulator</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        #output {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #111;
+            color: #33FF33;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+            height: 300px;
+            overflow-y: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="command" placeholder="Enter shell command">
+    <button onclick="executeCommand()">Execute</button>
+    <pre id="output" border="0"></pre>
+
+    <script>
+        const socket = io.connect();
+        const commandElem = document.getElementById('command');
+        const outputElem = document.getElementById('output');
+
+        socket.on('output', (data) => {
+            outputElem.textContent += data + '\n';
+            scrollToBottom();
+        });
+
+        socket.on('prompt', (data) => {
+            outputElem.textContent += data;
+            scrollToBottom();
+        });
+
+        function executeCommand() {
+            const command = commandElem.value;
+            outputElem.textContent += "$ "+command + '\n';
+            socket.emit('execute', command);
+            commandElem.value = '';  // Clear the input after execution
+        }
+
+        // Capture the Enter key press
+        commandElem.addEventListener('keydown', function(event) {
+            if (event.keyCode === 13) {  // Enter key has a keyCode of 13
+                event.preventDefault();  // Prevent the default action
+                executeCommand();
+            }
+        });
+
+        function scrollToBottom() {
+            outputElem.scrollTop = outputElem.scrollHeight;
+        }
+    </script>
+</body>
+</html>
